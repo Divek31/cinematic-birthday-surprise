@@ -20,6 +20,3 @@ A beautiful, cinematic, and interactive web page created as a special birthday s
 1. Clone the repository: `git clone https://github.com/Divek31/cinematic-birthday-surprise.git`
 2. Open `index.html` in your web browser.
 3. Turn up the volume for the audio feature to work optimally!
-
-## Author
-Created for someone special (Riddhi) to make their day unforgettable. ❤️
