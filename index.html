@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Cinematic Birthday Surprise | For Someone Special</title>
+    <!-- High-End Typography -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,900&display=swap"
+        rel="stylesheet">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HERO SECTION -->
+    <section id="hero-page" class="page active">
+        <div id="particle-container"
+            style="position: absolute; width: 100%; height: 100%; top:0; left:0; pointer-events: none;"></div>
+        <h1 class="hero-title">Happy Birthday, Riddhi</h1>
+        <p class="hero-sub">A Cinematic Journey Created Just For You</p>
+        <button class="btn-neon" onclick="transitionTo('message-slider-page')">Open Your Gift</button>
+    </section>
+
+    <!-- MESSAGE SLIDER SECTION -->
+    <section id="message-slider-page" class="page">
+        <div id="slider-particles"
+            style="position: absolute; width: 100%; height: 100%; top:0; left:0; pointer-events: none;"></div>
+        <div class="slider-card">
+            <div id="step-1" class="step-content active">
+                <h2 class="step-text">It's Your Special Day</h2>
+                <button class="btn-neon" onclick="nextStep(2)">Next</button>
+            </div>
+            <div id="step-2" class="step-content">
+                <h2 class="step-text">Have a look at it Madam Jii</h2>
+                <button class="btn-neon" onclick="nextStep(3)">Next</button>
+            </div>
+            <div id="step-3" class="step-content">
+                <h2 class="step-text">Ready for your surprise?</h2>
+                <button class="btn-neon" onclick="finishSlider()">Let's Go</button>
+            </div>
+            <div class="slider-dots">
+                <div id="dot-1" class="dot active"></div>
+                <div id="dot-2" class="dot"></div>
+                <div id="dot-3" class="dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CELEBRATION SECTION -->
+    <section id="celebration-page" class="page">
+        <div class="fairy-lights-container" id="fairy-lights-container">
+            <svg class="wire-svg" preserveAspectRatio="none" viewBox="0 0 1000 150">
+                <path id="wire-path" d="M0,20 Q100,60 200,20 T400,20 T600,20 T800,20 T1000,20" />
+            </svg>
+        </div>
+        <div class="glass-container" style="background: transparent; border: none; box-shadow: none;">
+            <h2 id="celeb-hint" style="font-size: 1.5rem; margin-bottom: 30px; letter-spacing: 2px;">The Stage is Set...
+            </h2>
+            <button id="celeb-master-btn" class="btn-neon" onclick="celebFlow()">💡 Turn On Lights</button>
+        </div>
+    </section>
+
+    <!-- CURTAIN SECTION -->
+    <section id="curtain-page" class="page" style="padding: 0;">
+        <div class="stage" id="stage">
+            <div class="curtain-panel curtain-left"></div>
+            <div class="curtain-panel curtain-right"></div>
+            <div class="secret-content">
+                <div class="message-card" id="message-card">
+                    <h2
+                        style="font-family: 'Dancing Script'; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--accent); margin-bottom: 20px;">
+                        My Dearest Riddhi,</h2>
+                    <p style="font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.8; color: rgba(255,255,255,0.8);">
+                        Today isn't just a date on the calendar; it's a celebration of the light you bring into my life.
+                        Every moment with you is like a frame from a beautiful movie, and I'm so lucky to be your
+                        co-star.
+                        May this year be filled with as much magic as you give to everyone around you.
+                    </p>
+                    <button class="btn-neon" style="margin-top: 40px; animation: none;"
+                        onclick="transitionTo('gallery-page')">Our Memories</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UPDATED GALLERY SECTION -->
+    <section id="gallery-page" class="page">
+        <!-- Persistent Background Elements -->
+        <div id="gallery-bg-elements"
+            style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;">
+        </div>
+
+        <h2 class="gallery-title">Moments in Time</h2>
+        <div class="gallery-grid">
+            <!-- Memory 1 -->
+            <div class="memory-card">
+                <img src="https://wallpapers.oneindia.com/ph-1024x768/2018/12/rashi-khanna_154512628300.jpg" alt="Memory"
+                    class="memory-image">
+                <div class="memory-hover-overlay">
+                    <p class="hover-message">You make my world beautiful ❤️</p>
+                </div>
+            </div>
+            <!-- Memory 2 -->
+            <div class="memory-card">
+                <img src="https://w0.peakpx.com/wallpaper/506/297/HD-wallpaper-rashi-khanna-actress-telugu.jpg" alt="Memory"
+                    class="memory-image">
+                <div class="memory-hover-overlay">
+                    <p class="hover-message">Our memories are forever ✨</p>
+                </div>
+            </div>
+            <!-- Memory 3 -->
+            <div class="memory-card">
+                <img src="https://www.cinejosh.com/gallereys/actress/normal/actress_rashi_khanna_photos_1810180429/actress_rashi_khanna_photos_1810180429_018.jpg" alt="Memory"
+                    class="memory-image">
+                <div class="memory-hover-overlay">
+                    <p class="hover-message">My favorite smile in the world 💖</p>
+                </div>
+            </div>
+            <!-- Memory 4 -->
+            <div class="memory-card">
+                <img src="https://preview.redd.it/rashi-khanna-shes-always-casted-as-the-pretty-and-popular-v0-mbxwg6ea5k8b1.jpg?width=451&format=pjpg&auto=webp&s=ebeea7d8d9eac6448206bbf4700017eefe849aeb" alt="Memory"
+                    class="memory-image">
+                <div class="memory-hover-overlay">
+                    <p class="hover-message">Every second with you is a gift 🎁</p>
+                </div>
+            </div>
+            <!-- Memory 5 -->
+            <div class="memory-card">
+                <img src="https://www.elahe.in/cdn/shop/files/285_3ede1728-06b6-402c-ba6f-f72198e79e38_2048x.jpg?v=1737011065" alt="Memory"
+                    class="memory-image">
+                <div class="memory-hover-overlay">
+                    <p class="hover-message">To many more adventures together 🥂</p>
+                </div>
+            </div>
+            <!-- Memory 6 -->
+            <div class="memory-card">
+                <img src="https://i.pinimg.com/originals/00/be/96/00be961bf30283b844a08eced6c47baa.jpg" alt="Memory"
+                    class="memory-image">
+                <div class="memory-hover-overlay">
+                    <p class="hover-message">Always & Forever 🌹</p>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; padding: 100px 0;">
+            <button class="btn-neon" onclick="location.reload()">Replay The Magic</button>
+        </div>
+    </section>
+
+    <audio id="birthday-audio" loop>
+        <source src="/song/Jhol Ringtone Download Female Voice.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
