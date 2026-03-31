@@ -26,7 +26,24 @@
             style="position: absolute; width: 100%; height: 100%; top:0; left:0; pointer-events: none;"></div>
         <h1 class="hero-title">Happy Birthday, [Name]</h1>
         <p class="hero-sub">A Cinematic Journey Created Just For You</p>
-        <button class="btn-neon" onclick="transitionTo('message-slider-page')">Open Your Gift</button>
+        
+        <!-- NEW VIBE SELECTOR -->
+        <div class="music-selector">
+            <p>Choose Your Vibe:</p>
+            <div class="selector-controls">
+                <select id="vibe-select" onchange="changeVibe(this.value)">
+                    <option value="HAPPY_BIRTHDAY.webm">Happy Birthday 🎉</option>
+                    <option value="Epic_Cinematic.webm">Epic Cinematic 🎬</option>
+                    <option value="Unplug_and_Unwind.webm">Unplug & Unwind ☕</option>
+                </select>
+                <span>OR</span>
+                <label for="custom-audio" class="upload-btn">Upload Your Own 🎵</label>
+                <input type="file" id="custom-audio" accept="audio/*" onchange="handleCustomAudio(event)" style="display:none;">
+            </div>
+            <p id="audio-status" style="font-size: 0.8rem; color: var(--gold); margin-top: 10px;"></p>
+        </div>
+
+        <button class="btn-neon" onclick="transitionTo('message-slider-page')" style="margin-top: 30px;">Open Your Gift</button>
     </section>
 
     <!-- MESSAGE SLIDER SECTION -->
@@ -169,9 +186,7 @@
         </div>
     </section>
 
-    <audio id="birthday-audio" loop>
-        <source src="/song/Jhol Ringtone Download Female Voice.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="birthday-audio" src="HAPPY_BIRTHDAY.webm" loop></audio>
 
     <!-- External JavaScript -->
     <script src="script.js"></script>

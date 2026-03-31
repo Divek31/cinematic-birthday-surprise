@@ -278,3 +278,32 @@ function extinguishCandles() {
         }
     }, 1500);
 }
+
+// --- DYNAMIC MUSIC SELECTION ---
+function changeVibe(src) {
+    const audio = document.getElementById('birthday-audio');
+    if (!audio) return;
+    audio.src = src;
+    audio.load();
+    document.getElementById('audio-status').innerText = "Vibe selected! It will play beautifully when the lights turn on.";
+}
+
+function handleCustomAudio(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const objectURL = URL.createObjectURL(file);
+        const audio = document.getElementById('birthday-audio');
+        if (audio) {
+            audio.src = objectURL;
+            audio.load();
+            document.getElementById('audio-status').innerText = `Custom track loaded: ${file.name}`;
+            
+            const select = document.getElementById('vibe-select');
+            const customOption = document.createElement('option');
+            customOption.text = "Your Custom Setup 🎵";
+            customOption.value = objectURL;
+            select.add(customOption);
+            select.value = objectURL;
+        }
+    }
+}
