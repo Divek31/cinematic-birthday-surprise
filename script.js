@@ -69,10 +69,11 @@ function celebFlow() {
     } else if (celebStep === 3) {
         spawnBalloons(document.body);
         hint.innerText = "Almost there...";
-        btn.innerText = "✨ Show The Message";
+        btn.innerText = "✨ Bring the Cake";
         celebStep = 4;
     } else {
-        transitionTo('curtain-page');
+        transitionTo('cake-page');
+        startCandleBlow();
     }
 }
 
@@ -157,3 +158,123 @@ function initFairyLights() {
 window.onload = () => {
     initFairyLights();
 };
+
+// --- MUSIC PLAYER LOGIC ---
+let isMusicPlaying = false;
+function toggleMusic() {
+    const audio = document.getElementById('birthday-audio');
+    const btn = document.getElementById('music-toggle-btn');
+    if (!audio) return;
+    
+    if (isMusicPlaying) {
+        audio.pause();
+        btn.innerText = "🔇";
+        isMusicPlaying = false;
+    } else {
+        audio.play().catch(() => {});
+        btn.innerText = "🔊";
+        isMusicPlaying = true;
+    }
+}
+
+// Hook into existing audio play in celebFlow to sync icons
+const audioEl = document.getElementById('birthday-audio');
+if (audioEl) {
+    audioEl.addEventListener('play', () => {
+        const btn = document.getElementById('music-toggle-btn');
+        if (btn) btn.innerText = "🔊";
+        isMusicPlaying = true;
+    });
+    audioEl.addEventListener('pause', () => {
+        const btn = document.getElementById('music-toggle-btn');
+        if (btn) btn.innerText = "🔇";
+        isMusicPlaying = false;
+    });
+}
+
+// --- CANDLE BLOW LOGIC ---
+let audioContext;
+let analyser;
+let micStream;
+let blowDetectionRaf;
+let candlesOut = false;
+
+async function startCandleBlow() {
+    if (candlesOut) return;
+    
+    try {
+        micStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioContext.createAnalyser();
+        const microphone = audioContext.createMediaStreamSource(micStream);
+        microphone.connect(analyser);
+        analyser.fftSize = 512;
+        
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+        let blowDuration = 0;
+
+        function detectBlow() {
+            if (candlesOut) return;
+            
+            analyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for(let i=0; i<bufferLength; i++) {
+                sum += dataArray[i];
+            }
+            let average = sum / bufferLength;
+
+            // Threshold for blowing sound (adjust as needed, usually around 35-45)
+            if (average > 35) {
+                blowDuration++;
+                if (blowDuration > 10) { // Require sustained blow
+                    extinguishCandles();
+                    return; // Stop detection
+                }
+            } else {
+                blowDuration = 0;
+            }
+            blowDetectionRaf = requestAnimationFrame(detectBlow);
+        }
+        detectBlow();
+    } catch(err) {
+        console.warn("Microphone access denied or not supported.", err);
+        // Fallback: update hint text
+        const hint = document.getElementById('mic-hint');
+        if(hint) hint.innerHTML = "Microphone access blocked. <br>Please <b>tap the cake</b> to blow out the candles!";
+    }
+}
+
+function extinguishCandlesFallback() {
+    if (!candlesOut) extinguishCandles();
+}
+
+function extinguishCandles() {
+    if (candlesOut) return;
+    candlesOut = true;
+    
+    if (blowDetectionRaf) cancelAnimationFrame(blowDetectionRaf);
+    
+    // Stop mic tracks
+    if (micStream) {
+        micStream.getTracks().forEach(track => track.stop());
+    }
+
+    // Extinguish flames sequentially
+    const f1 = document.getElementById('flame1');
+    const f2 = document.getElementById('flame2');
+    const f3 = document.getElementById('flame3');
+    
+    if (f1) f1.classList.add('extinguished');
+    setTimeout(() => { if (f2) f2.classList.add('extinguished'); }, 200);
+    setTimeout(() => { if (f3) f3.classList.add('extinguished'); }, 400);
+
+    // Show next button
+    setTimeout(() => {
+        const nextBtn = document.getElementById('cake-next-btn');
+        if (nextBtn) {
+            nextBtn.style.opacity = '1';
+            nextBtn.style.pointerEvents = 'auto';
+        }
+    }, 1500);
+}

@@ -15,6 +15,11 @@
 
 <body>
 
+    <!-- Persistent Music Player -->
+    <div id="music-player" class="music-player">
+        <button id="music-toggle-btn" class="music-btn" onclick="toggleMusic()" title="Play/Pause Music">🔇</button>
+    </div>
+
     <!-- HERO SECTION -->
     <section id="hero-page" class="page active">
         <div id="particle-container"
@@ -63,6 +68,22 @@
         </div>
     </section>
 
+    <!-- CAKE PAGE -->
+    <section id="cake-page" class="page">
+        <h2 class="step-text" style="font-size: clamp(2rem, 5vw, 3rem); text-align: center; margin-bottom: 20px;">Make a Wish!</h2>
+        <p id="mic-hint" style="color: rgba(255,255,255,0.7); margin-bottom: 50px; font-size: 1.1rem;">Blow gently into your microphone to put out the candles.<br><span style="font-size:0.9rem; opacity:0.6;">(Or just click the cake if you prefer!)</span></p>
+        
+        <div class="cake-container" id="cake-container" onclick="extinguishCandlesFallback()">
+            <div class="cake">
+                <div class="candle"><div class="flame flame-anim" id="flame1"></div></div>
+                <div class="candle"><div class="flame flame-anim" id="flame2"></div></div>
+                <div class="candle"><div class="flame flame-anim" id="flame3"></div></div>
+            </div>
+        </div>
+        
+        <button id="cake-next-btn" class="btn-neon" style="opacity: 0; pointer-events: none; margin-top: 60px; transition: opacity 1s;" onclick="transitionTo('curtain-page')">See Your Surprise</button>
+    </section>
+
     <!-- CURTAIN SECTION -->
     <section id="curtain-page" class="page" style="padding: 0;">
         <div class="stage" id="stage">
@@ -72,7 +93,7 @@
                 <div class="message-card" id="message-card">
                     <h2
                         style="font-family: 'Dancing Script'; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--accent); margin-bottom: 20px;">
-                        My Dearest Riddhi,</h2>
+                        My Dearest Friend,</h2>
                     <p style="font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.8; color: rgba(255,255,255,0.8);">
                         Today isn't just a date on the calendar; it's a celebration of the light you bring into my life.
                         Every moment with you is like a frame from a beautiful movie, and I'm so lucky to be your
